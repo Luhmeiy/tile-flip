@@ -9,6 +9,6 @@
 	<title>Tile Flip</title>
 </svelte:head>
 
-<div>
+<div class="w-dvw h-dvh bg-slate-6 flex justify-center items-center">
 	{@render children()}
 </div>
