@@ -8,14 +8,19 @@
 	);
 
 	let isGameWon = $state(false);
+	let flipDirection = $state('col');
 
 	const flipTiles = ({ direction, position }: { direction: string; position?: number }) => {
 		if (typeof position === 'number') {
 			if (direction === 'col') {
+				flipDirection = 'col';
+
 				for (let row of grid) {
 					row[position] = !row[position];
 				}
 			} else if (direction === 'row') {
+				flipDirection = 'row';
+
 				grid[position] = grid[position].map((cell) => !cell);
 			}
 		} else {
@@ -41,7 +46,7 @@
 	</div>
 
 	<div>
-		<Grid {grid} />
+		<Grid {grid} {flipDirection} />
 
 		<div class="flex gap-1">
 			<ButtonGroup length={cols} direction="col" {flipTiles} />
