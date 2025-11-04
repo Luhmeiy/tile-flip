@@ -7,6 +7,8 @@
 		Array.from({ length: rows }, () => Array.from({ length: cols }, () => true))
 	);
 
+	let isGameWon = $state(false);
+
 	const flipTiles = ({ direction, position }: { direction: string; position?: number }) => {
 		if (typeof position === 'number') {
 			if (direction === 'col') {
@@ -22,7 +24,13 @@
 				row[position] = !row[position];
 			});
 		}
+
+		isGameWon = grid.every((row) => row.every((value) => value === false));
 	};
+
+	$effect(() => {
+		if (isGameWon) console.log('You win');
+	});
 </script>
 
 <div class="flex">
