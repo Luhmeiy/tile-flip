@@ -5,7 +5,7 @@
 	const [rows, cols] = [5, 5];
 
 	const grid = $state(
-		Array.from({ length: rows }, () => Array.from({ length: cols }, () => true))
+		Array.from({ length: rows }, () => Array.from({ length: cols }, () => false))
 	);
 
 	let isGameStarted = $state(false);
@@ -79,7 +79,7 @@
 	onMount(() => startGame());
 </script>
 
-<div class="flex">
+<div class="relative flex">
 	{#if isGameStarted}
 		<div class="flex flex-col gap-1">
 			<ButtonGroup length={rows} direction="row" {flipTiles} />
@@ -93,6 +93,17 @@
 			<div class="flex gap-1">
 				<ButtonGroup length={cols} direction="col" {flipTiles} />
 			</div>
+		</div>
+	{/if}
+
+	{#if isGameWon}
+		<div class="absolute -bottom-20 w-full flex flex-col items-center gap-2">
+			<h2 class="text-4xl font-bold text-white">You won!</h2>
+
+			<button
+				class="bg-red font-semibold text-white px-4 py-2 rounded transition-colors duration-500 hover:bg-red/85"
+				onclick={startGame}>Retry</button
+			>
 		</div>
 	{/if}
 </div>
